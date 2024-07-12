@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <script src="{% static 'home.js' %}"></script>
+
+    <script>
+        const uid = "{{ uid }}";
+    </script>
+</head>
+
+<body>
+
+    <div id="parent">
+        <a class="aa" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"
+            id="menu-icon">
+            ☰
+        </a>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div id="container2">
+                <div id="ttask">
+                    <h4>Tasks</h4>
+                    <ul>
+                        <a href="#" class="a" id="Upcoming" data-bs-dismiss="offcanvas" onclick="fun(this.id,uid)">
+                            <li>Upcoming</li>
+                        </a>
+                        <a href="#" class="a" id="Today" data-bs-dismiss="offcanvas" onclick="fun(this.id,uid)">
+                            <li>Today</li>
+                        </a>
+                        <a href="#" class="a" id="Completed" data-bs-dismiss="offcanvas" onclick="fun1(this.id,uid)">
+                            <li>Completed</li>
+                        </a>
+                        <a href="#" class="a" id="Missed" data-bs-dismiss="offcanvas" onclick="fun(this.id,uid)">
+                            <li>Missed</li>
+                        </a>
+                    </ul>
+                </div>
+                <div id="cat">
+                    <h4>Categories</h4>
+                    <div id="lists">
+                        <ul>
+                            <a class="a" id="All Tasks" data-bs-dismiss="offcanvas" onclick="fun(this.id,uid)">
+                                <li>All</li>
+                            </a>
+                            {% for list in lists %}
+                            <a id="{{list.id}}" class="a" value="{{list.name}}" href="#" data-bs-dismiss="offcanvas"
+                                onclick="fun(this.id,uid)">
+                                <li>{{list.name}}</li>
+                            </a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <form method="post" action="savelist">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ id }}">
+                        <input type="hidden" name="name" value="{{ name }}">
+                        <input type="text" class="in" name="name">
+                        <input type="submit" class="in" value="Add Category"></button>
+                    </form>
+                    <br>
+                    <form method="post" action="delete" id="del">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{ uid }}">
+                        <input type="hidden" name="name" value="{{ name }}">
+                        <label for="list_id">Select Category</label>
+                        <select id="list_id" name="list_id" required>
+                            {% for list in lists %}
+                            <option value="{{ list.id }}">{{ list.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div id="container">
+            <div id="ttask">
+                <h4>Tasks</h4>
+                <ul>
+                    <a href="#" class="a" id="Upcoming" onclick="fun(this.id,uid)">
+                        <li>Upcoming</li>
+                    </a>
+                    <a href="#" class="a" id="Today" onclick="fun(this.id,uid)">
+                        <li>Today</li>
+                    </a>
+                    <a href="#" class="a" id="Completed" onclick="fun1(this.id,uid)">
+                        <li>Completed</li>
+                    </a>
+                    <a href="#" class="a" id="Missed" onclick="fun(this.id,uid)">
+                        <li>Missed</li>
+                    </a>
+                </ul>
+            </div>
+            <div id="cat">
+                <h4>Categories</h4>
+                <div id="lists">
+                    <ul>
+                        <a class="a" id="All Tasks" onclick="fun(this.id,uid)">
+                            <li>All</li>
+                        </a>
+                        {% for list in lists %}
+                        <a id="{{list.id}}" class="a" value="{{list.name}}" href="#" onclick="fun(this.id,uid)">
+                            <li>{{list.name}}</li>
+                        </a>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <form method="post" action="{% url 'savelist' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ uid }}">
+                    <input type="hidden" name="name" value="{{ name }}">
+                    <input type="text" class="in" name="cat">
+                    <input type="submit" class="in" value="Add Category"></button>
+                </form>
+                <br>
+                <form method="post" action="delete" id="del">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ uid }}">
+                    <input type="hidden" name="name" value="{{ name }}">
+                    <label for="list_id">Select Category</label>
+                    <select id="list_id" name="list_id" required>
+                        {% for list in lists %}
+                        <option value="{{ list.id }}">{{ list.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div id="popup">
+            <form method="post" action="savetasks" id="save">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ uid }}">
+                <input type="hidden" name="name" value="{{ name }}">
+                <table id="table" cellspacing="15">
+                    <tr>
+                        <th><label for="task">Task Name:</label></th>
+                        <td><input type="text" class="in" id="name" name="task" required></td>
+                    </tr>
+                    <tr>
+                        <th><label for="list">List:</label></th>
+                        <td><select id="list" name="list_id" required>
+                                {% for list in lists %}
+                                <option value="{{ list.id }}">{{ list.name }}</option>
+                                {% endfor %}
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <th><label for="desc">Description:</label></th>
+                        <td> <textarea id="desc" name="desc" rows="4" required></textarea></td>
+                    </tr>
+                    <tr>
+                        <th><label for="pri">Set Priority</label></th>
+                        <td><select name="pri" id="pri" required>
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <th><label for="due">Deadline:</label></th>
+                        <td><input type="date" class="in" id="due" name="due" required></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><button type="submit" id="add" class="button">Save Task</button>
+                        </td>
+                        <td style="text-align: center;"><button type="button" id="add"
+                                onclick="closeForm()">Close</button></td>
+                    </tr>
+                </table>
+
+            </form>
+        </div>
+        <div id="display">
+            <a href="logout"><button id="add" class="logout">Logout</button></a>
+<br>
+            <h4 id="welcome">Welcome, {{name}}</h4>
+            <textarea id="textarea" placeholder="+ Add Task" readonly></textarea>
+            <div id="id1"></div>
+        </div>
+
+    </div>
+</body>
+
+</html>

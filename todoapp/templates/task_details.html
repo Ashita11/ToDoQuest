@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewdiv/divort" content="width=device-width, initial-scale=1.0">
+    <title>Task Details</title>
+    <link rel="stylesheet" href="{% static 'task_details.css' %}">
+
+</head>
+<body>
+    <div id="b">
+        <h4>Task Details</h4>
+        <table class="task" cellspacing="20">
+            <tr>
+                <th id="th">Name:</th>
+                <td id="th">{{ task.name }}</td>
+            </tr>
+            <tr>
+                <th id="th">Description:</th>
+                <td id="th">{{ task.desc }}</td>
+            </tr>
+            <tr>
+                <th id="th">Priority:</th>
+                <td id="th">{{ task.priority }}</td>
+            </tr>
+            <tr>
+                <th id="th">DeadLine:</th>
+                <td id="th">{{ task.due_date }}</td>
+            </tr>
+        </table>
+        <div id="det">
+            <h5>Name</h5>
+        <p>{{ task.name }}</p>
+        <h5>Description:</h5>
+        <p>{{ task.desc }}</p>
+        <h5>Priority:</h5>
+        <p>{{ task.priority }}</p>
+        <h5>DeadLine:</h5>
+        <p>{{ task.due_date }}</p>
+        </div>
+    </div>
+</body>
+</html>

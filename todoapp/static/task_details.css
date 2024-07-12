@@ -1,0 +1,38 @@
+.task {
+    font-size: 20px;
+    margin: 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+#b {
+    background-color: #2A2438;
+    border-radius: 20px;
+    color: white;
+    margin-right: 20px;
+}
+
+#th{
+    padding-bottom: 20px;
+    padding-right: 10px;
+}
+
+#det{
+    display: none;
+}
+
+@media screen and (min-width:400px) and (max-width: 500px){
+    #b{
+        margin: 0;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .task{
+        display: none;
+    }
+    #det{
+        display: block;
+        padding: 10px;
+    }
+}
