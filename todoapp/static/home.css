@@ -55,7 +55,7 @@ body {
     border-radius: 20px;
     margin: 2vh;
     color: white;
-    background-color: #535878;
+    background-color: #5f668f;
     overflow: auto;
 }
 
@@ -104,8 +104,8 @@ label {
 
 .in,
 select {
-    width: 150px;
-    height: 20px;
+    width: 160px;
+    height: 30px;
     font-size: 15px;
     text-align: center;
     padding: 0;
