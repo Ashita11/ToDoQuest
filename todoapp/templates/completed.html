@@ -39,10 +39,6 @@
                     <ul>
                         {% for t in task %}
                         <li class="li" id="li1">
-                            <!-- <a class="del" href="delTask?id={{t.id}}&uid={{uid}}">
-                                <img height="15px" width="15px" src="{% static 'bin.png' %}" alt="Completed">
-                            </a> -->
-
                             <a class="del" href="#" onclick="com1('{{ t.id }}', '{{ uid }}', '{{ nm }}')">
                                 <img height="15px" width="15px" src="{% static 'bin.png' %}" alt="Completed">
                             </a>

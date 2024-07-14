@@ -9,17 +9,6 @@
     <link rel="stylesheet" href="{% static 'display.css' %}">
     <script>
         const uid = "{{ uid }}";
-        // const nm = "{{ nm }}";
-        // function del(id, uid, nm) {
-        //     obj = new XMLHttpRequest();
-        //     obj.onreadystatechange = function () {
-        //         if (this.readyState == 4 && this.status == 200) {
-        //             document.getElementById('id1').innerHTML = this.responseText;
-        //         }
-        //     };
-        //     obj.open('GET', 'delTask?id=' + id + "&uid=" + uid + "&nm=" + nm, true);
-        //     obj.send();
-        // }
     </script>
 </head>
 
@@ -50,17 +39,10 @@
                     <ul>
                         {% for t in task %}
                         <li class="li" id="li1">
-                            <!-- <a href="complete?id={{t.id}}&uid={{uid}}" class="del">
-                                <img height="15px" width="15px" src="{% static 'tick.png' %}" alt="Completed">
-                            </a> -->
 
                             <a href="#" class="del" onclick="com('{{ t.id }}', '{{ uid }}', '{{ li.id }}')">
                                 <img height="15px" width="15px" src="{% static 'tick.png' %}" alt="Completed">
                             </a>
-
-                            <!-- <a href="delTask?id={{t.id}}&uid={{uid}}">
-                                <img height="15px" width="15px" src="{% static 'bin.png' %}" alt="Completed">
-                            </a> -->
 
                             <a href="#" id="{{t.id}}" onclick="del('{{ t.id }}', '{{ uid }}', '{{ li.id }}')">
                                 <img height="15px" width="15px" src="{% static 'bin.png' %}" alt="Completed">
